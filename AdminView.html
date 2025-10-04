@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<!-- saved from url=(0038)http://127.0.0.1:5500/adminview01.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin View (Approval Rules)</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./New Admin View (Approval Rules)_files/all.min.css">
     <style>
         :root {
             --primary-color: #00ff9d;
@@ -338,6 +338,16 @@
             box-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
         }
 
+        .percentage-slider input::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+        }
+
         .action-buttons {
             display: flex;
             justify-content: flex-end;
@@ -459,22 +469,14 @@
                     <label for="user">User</label>
                     <div class="input-with-icon">
                         <i class="fas fa-user"></i>
-                        <input 
-                            type="text" 
-                            id="user" 
-                            placeholder="Enter user name (e.g., marc)" 
-                        />
+                        <input type="text" id="user" placeholder="Enter user name (e.g., marc)">
                     </div>
                 </div>
                 <div class="form-group" style="flex: 3;">
                     <label for="rules-description">Description about rules</label>
                     <div class="input-with-icon">
                         <i class="fas fa-file-alt"></i>
-                        <input 
-                            type="text" 
-                            id="rules-description" 
-                            placeholder="Enter description for approval rules" 
-                        />
+                        <input type="text" id="rules-description" placeholder="Enter description for approval rules">
                     </div>
                 </div>
             </div>
@@ -492,7 +494,7 @@
                     </div>
                 </div>
                 <div class="checkbox-group">
-                    <input type="checkbox" id="manager-approver" checked />
+                    <input type="checkbox" id="manager-approver" checked="">
                     <div>
                         <label for="manager-approver">Is manager an approver?</label>
                         <div class="checkbox-info">
@@ -517,7 +519,7 @@
                         <td>John</td>
                         <td>
                             <div class="checkbox-group">
-                                <input type="checkbox" checked />
+                                <input type="checkbox" checked="">
                                 <div>
                                     <label>Required Approver</label>
                                     <div class="checkbox-info">
@@ -531,7 +533,7 @@
                         <td>Mitchell</td>
                         <td>
                             <div class="checkbox-group">
-                                <input type="checkbox" />
+                                <input type="checkbox">
                                 <div>
                                     <label>Required Approver</label>
                                     <div class="checkbox-info">
@@ -545,7 +547,7 @@
                         <td>Andreas</td>
                         <td>
                             <div class="checkbox-group">
-                                <input type="checkbox" />
+                                <input type="checkbox">
                                 <div>
                                     <label>Required Approver</label>
                                     <div class="checkbox-info">
@@ -561,7 +563,7 @@
 
         <div class="form-section">
             <div class="checkbox-group">
-                <input type="checkbox" id="approver-sequence" />
+                <input type="checkbox" id="approver-sequence">
                 <div>
                     <label for="approver-sequence">Approvers Sequence</label>
                     <div class="checkbox-info">
@@ -579,23 +581,24 @@
                 <div class="form-group">
                     <label for="min-percentage">Minimum Approval Percentage</label>
                     <div class="percentage-container">
-                        <input
+                        <!-- <input
                             type="number"
                             id="min-percentage"
                             value="60"
                             min="0"
                             max="100"
-                        />
-                        <span>%</span>
+                        /> -->
+                        <span>60%</span>
                     </div>
-                    <div class="percentage-slider">
+                    <!-- <div class="percentage-slider">
                         <input
                             type="range"
+                            id="percentage-slider"
                             min="0"
                             max="100"
                             value="60"
                         />
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -607,7 +610,7 @@
             </button>
             <button class="save-button">
                 <i class="fas fa-save"></i>
-                <span>Save Approval Rules</span>
+                <span><a style="text-decoration: none; color: #121212; font-family: Arial, Helvetica, sans-serif;font-size: 16px;" href="./employeeView.html">Save Approval Rules</a></span>
             </button>
         </div>
     </div>
@@ -618,16 +621,20 @@
             const saveButton = document.querySelector('.save-button');
             const resetButton = document.querySelector('.reset-button');
             const percentageInput = document.getElementById('min-percentage');
-            const percentageSlider = document.querySelector('.percentage-slider input');
+            const percentageSlider = document.getElementById('percentage-slider');
             
             // Sync percentage input and slider
-            percentageInput.addEventListener('input', function() {
-                percentageSlider.value = this.value;
-            });
+            function syncPercentage() {
+                percentageInput.value = percentageSlider.value;
+            }
             
-            percentageSlider.addEventListener('input', function() {
-                percentageInput.value = this.value;
-            });
+            function syncSlider() {
+                percentageSlider.value = percentageInput.value;
+            }
+            
+            // Add event listeners for real-time syncing
+            percentageInput.addEventListener('input', syncSlider);
+            percentageSlider.addEventListener('input', syncPercentage);
             
             // Save button functionality
             saveButton.addEventListener('click', function() {
@@ -666,5 +673,43 @@
             });
         });
     </script>
-</body>
-</html>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+</body></html>
